@@ -27,28 +27,10 @@ user.getAll = async () => {
 
 user.getByNick = async (nick) => {
     var query = `SELECT name, nick, email, image FROM usuario WHERE nick = '${nick}'`;
-    await db.connect();
-    result = await db.query(query);
-    await db.end();
-    if(!result) return undefined;
-    return result.rows[0];
-}
-
-user.getByEmail = async (email) => {
-    var query = `SELECT name, nick, email, image FROM usuario WHERE email = '${email}'`;
-    await db.connect();
-    result = await db.query(query);
-    await db.end();
-    if(!result) return undefined;
-    return result.rows[0];
-}
-
-user.auth = async (nick, password) => {
-    var query = `SELECT name, nick, email, image FROM usuario WHERE nick = '${nick}' AND password = '${password}'`;
-    console.log(query)
     try{
         await db.connect();
-        var result = await db.query(query);
+        result = await db.query(query);
+        await db.end();
         if(!result) return undefined;
         return result.rows[0];
     }catch(err){
@@ -56,7 +38,33 @@ user.auth = async (nick, password) => {
     }finally{
         await db.end();
     }
-    
+}
+
+user.getByEmail = async (email) => {
+    var query = `SELECT name, nick, email, image FROM usuario WHERE email = '${email}'`;
+    try{
+        await db.connect();
+        result = await db.query(query);
+        if(!result) return undefined;
+        return result.rows[0];
+    }catch(err){
+        return err;
+    }finally{
+        await db.end();
+    }
+}
+
+user.auth = async (nick, password) => {
+    var query = `SELECT name, nick, email, image FROM usuario WHERE nick = '${nick}' AND password = '${password}'`;
+    try{
+        await db.connect();
+        var result = await db.query(query);
+        await db.end();
+        if(!result) return undefined;
+        return result.rows[0];
+    }catch(err){
+        return err;
+    }
 }
 
 module.exports = user;

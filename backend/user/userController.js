@@ -34,15 +34,16 @@ controller.auth = async (req, res) =>{
     const { nick, password } = req.body;
     if(!nick || !password) return res.json({error: "Dados insuficientes"});
     
-    var teste = await model.getByNick(nick);
-    if( !teste ) return res.json({error: 'Usuário não cadastrado'});
+    /* POR ALGUM MOTIVO, COM ESSE TRECHO DE CÓDIGO A AUTENTICAÇÃO NÃO FUNCIONA
+    var testeByNick = await model.getByNick(nick);
+    if( !testeByNick ) return res.json({error: 'Usuário não cadastrado'});
+    */
 
-    var user = await model.auth(nick, password);
-    console.log("User: " + user);
+    const user = await model.auth(nick, password);
     if(!user) return res.json({error: "Dados incorretos"});
 
-    var token = createToken(user.nick);
-    return res.json({...user, token});
+    var token = await createToken(user.nick);
+    return res.json({user, token});
 }
 
 async function createToken(nick){
