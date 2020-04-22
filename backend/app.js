@@ -1,21 +1,23 @@
-const app = require('express')();
+const express = require('express');
+const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const config = require('./config')
 const userRoute = require('./user/userRoute');
-const indexRoute = require('./indexRoute');
 
 const server_port = config.server_port;
 
 app.use(cors());
 
 // Body Parser
-app.use(bodyParser.urlencoded({extended: false}));
+//app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Endpoints
-app.use('/', indexRoute);
+app.get('/', (req, res) => {
+    res.send({message: "Rota GET index"})
+})
 
 app.use('/user', userRoute);
 

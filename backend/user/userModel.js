@@ -18,7 +18,6 @@ user.insert = async (name, nick, password, email, image) => {
 
 user.getAll = async () => {
     var query = `SELECT name, nick, email, image FROM usuario`;
-    console.log(query)
     await db.connect();
     result = await db.query(query);
     await db.end();

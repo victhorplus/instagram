@@ -1,15 +1,20 @@
 const jwt = require('jsonwebtoken');
-const model = require('./userModel');
+const model = require('./userModels');
 const config = require('../config')
 
 const controller = {}
 
 controller.insert = async (req, res) => {
     const { name, nick, password, email, image } = req.body;
+    console.log(name)
+    console.log(nick)
+    console.log(password)
+    console.log(email)
+    console.log(image)
     // Verificação
-    if(!name, !nick, !password, !email, !image) return res.json({error: "Dados insuficientes"});
-    if(model.getByNick(nick)) return res.json({error: "Nick de usuário já está em uso"})
-    if(model.getByEmail(email)) return res.json({error: "Email de usuário já está em uso"})
+    if(!name, !nick, !password, !email) return res.json({error: "Dados insuficientes"});
+    if(await model.getByNick(nick)) return res.json({error: "Nick de usuário já está em uso"})
+    if(await model.getByEmail(email)) return res.json({error: "Email de usuário já está em uso"})
 
     var result = await model.insert(name, nick, password, email, image);
     var token = await createToken(result.nick);
@@ -18,7 +23,7 @@ controller.insert = async (req, res) => {
 
 controller.getAll = async (req, res) => {
     const users = await model.getAll();
-    return res.json({users})
+    return res.json(users)
 }
 
 controller.getByNick = async (req, res) => {

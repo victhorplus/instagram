@@ -5,9 +5,10 @@ const config = () => {
         case 'dev':
         return {
             server_port: 3000,
-            dbr_user: 'postgres',
+            dbr_sgbd: 'postgres',
             dbr_host: 'localhost',
-            dbr_name: 'teste',
+            dbr_name: 'instagram',
+            dbr_user: 'postgres',
             dbr_password: 'Tribu971211',
             dbr_port: 5432,
             token_key: 'banana123',
