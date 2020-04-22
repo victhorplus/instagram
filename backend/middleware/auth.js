@@ -7,7 +7,8 @@ const auth = (req, res, next) => {
 
     jwt.verify(token, config.token_key, (err, decoded) => {
         if(err) return res.json({error: "Token inválido"})
-        res.locals.userNick = decoded;
+        res.locals.userNick = decoded.nick;
+        if(decoded.nick != req.body.nick) return res.json({ error: "Token incompatível"})
         next();
     })
 }

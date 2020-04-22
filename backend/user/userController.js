@@ -6,11 +6,7 @@ const controller = {}
 
 controller.insert = async (req, res) => {
     const { name, nick, password, email, image } = req.body;
-    console.log(name)
-    console.log(nick)
-    console.log(password)
-    console.log(email)
-    console.log(image)
+
     // Verificação
     if(!name, !nick, !password, !email) return res.json({error: "Dados insuficientes"});
     if(await model.getByNick(nick)) return res.json({error: "Nick de usuário já está em uso"})
@@ -39,16 +35,23 @@ controller.auth = async (req, res) =>{
     const { nick, password } = req.body;
     if(!nick || !password) return res.json({error: "Dados insuficientes"});
     
-    /* POR ALGUM MOTIVO, COM ESSE TRECHO DE CÓDIGO A AUTENTICAÇÃO NÃO FUNCIONA
     var testeByNick = await model.getByNick(nick);
     if( !testeByNick ) return res.json({error: 'Usuário não cadastrado'});
-    */
 
     const user = await model.auth(nick, password);
     if(!user) return res.json({error: "Dados incorretos"});
 
     var token = await createToken(user.nick);
     return res.json({user, token});
+}
+
+controller.editProfile = async (req, res) => {
+    var { name, nick, image } = req.body;
+    
+    if(!nick || !name) return res.json({ error: 'Dados insuficientes' });
+    
+    var user = await model.editProfile(nick, name, image);
+    return res.json({user});
 }
 
 async function createToken(nick){

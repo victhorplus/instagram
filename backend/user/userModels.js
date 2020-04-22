@@ -33,8 +33,6 @@ user.insert = async (name, nick, password, email, image) => {
         return query.dataValues;
     }catch(err){
         console.log(err)
-    }finally{
-        // await sequelize.close()
     }
 }
 
@@ -44,8 +42,6 @@ user.getAll = async () => {
         return JSON.parse(JSON.stringify(query, null, 2));
     }catch(err){
         console.log(err)
-    }finally{
-        // await sequelize.close();
     }
 }
 
@@ -58,8 +54,6 @@ user.getByNick = async (nick) => {
         return JSON.parse(JSON.stringify(query, null, 2));
     }catch(err){
         console.log(err)
-    }finally{
-        // await sequelize.close();
     }
 }
 
@@ -72,8 +66,6 @@ user.getByEmail = async (email) => {
         return JSON.parse(JSON.stringify(query, null, 2));
     }catch(err){
         console.log(err)
-    }finally{
-        // await sequelize.close();
     }
 }
 
@@ -86,8 +78,22 @@ user.auth = async (nick, password) => {
         return JSON.parse(JSON.stringify(query, null, 2));
     }catch(err){
         console.log(err)
-    }finally{
-        // await sequelize.close();
+    }
+}
+
+user.editProfile = async (nick, name, image) => {
+    try{
+        var query = await User.update(
+            { name, image },
+            { where: { nick } }
+        );
+        query = await User.findOne({
+            attributes: ['name', 'nick', 'email', 'image'],
+            where: { nick }
+        });
+        return JSON.parse(JSON.stringify(query, null, 2));
+    }catch(err){
+        console.log(err)
     }
 }
 
@@ -103,12 +109,9 @@ async function teste(){
         return JSON.parse(JSON.stringify(query, null, 2));
     }catch(err){
         console.log(err)
-    }finally{
-        // await sequelize.close();
     }
 }
 
 t1 = async () => {
-    console.log( await teste() );
+    console.log( await user.editProfile('teste04', 'teste 04', 'teste04_1587578117077_perfil.png') );
 }
-

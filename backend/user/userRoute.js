@@ -9,5 +9,6 @@ router.get("/search/:id", controller.getByNick);
 router.post('/create', storage.single("image"), controller.insert);
 router.post('/auth', controller.auth);
 
+router.put('/edit', auth, storage.single("image"), controller.editProfile);
 
 module.exports = router;
