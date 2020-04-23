@@ -54,6 +54,16 @@ controller.editProfile = async (req, res) => {
     return res.json({user});
 }
 
+controller.editPassword = async (req, res) => {
+    var { nick, password, newPassword } = req.body;
+    
+    if( !nick || !password || !newPassword ) return res.json({ error: 'Dados insuficientes' });
+    if( !(await model.auth(nick, password) )) return res.json({ error: "Senha incorreta" });
+
+    var user = await model.editPassword(nick, newPassword);
+    return res.json({user});
+}
+
 async function createToken(nick){
     return await jwt.sign({nick}, config.token_key, {expiresIn: config.token_expiresIn});
 }

@@ -97,6 +97,22 @@ user.editProfile = async (nick, name, image) => {
     }
 }
 
+user.editPassword = async (nick, password) => {
+    try{
+        var query = await User.update(
+            { password },
+            { where: { nick } }
+        );
+        query = await User.findOne({
+            attributes: ['name', 'nick', 'email', 'image'],
+            where: { nick }
+        });
+        return JSON.parse(JSON.stringify(query, null, 2));
+    }catch(err){
+        console.log(err)
+    }
+}
+
 module.exports = user;
 
 
