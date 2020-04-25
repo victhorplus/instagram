@@ -1,5 +1,8 @@
 const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
 const config = require('./config')
+
+const db = {};
 
 const sequelize = new Sequelize(
     config.dbr_name, 
@@ -11,16 +14,31 @@ const sequelize = new Sequelize(
     }
 );
 
-module.exports = sequelize;
+const options = { useNewUrlParser: true , useUnifiedTopology: true };
+
+mongoose.connect(config.mongo_url, options);;
+mongoose.set('useCreateIndex', true);
+
+db.sequelize = sequelize;
+db.mongoose = mongoose;
+
+module.exports = db;
 
 async function teste(){
     try {
-        await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
+        await db.sequelize.authenticate();
+        console.log('Conexão com o sequelize feita com sucesso');
+
+        var bd = db.mongoose.connection;
+        bd.on('error', console.error.bind(console, 'connection error:'));
+        bd.once('open', function() {
+            console.log('Conexão com o mongoose feita com sucesso');
+        });
       } catch (error) {
         console.error('Unable to connect to the database:', error);
-      }
+    }
 }
+teste();
 /*
 const pg = require('pg')
 const config = require('./config.js')
