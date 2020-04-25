@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 
 const config = require('./config')
 const userRoute = require('./user/userRoute');
+const postRoute = require('./post/postRoutes');
 
 const server_port = config.server_port;
 
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/user', userRoute);
+app.use('/post', postRoute);
 
 app.listen(server_port, () => {
     console.log(`Servidor rodando na porta: ${server_port}`)
