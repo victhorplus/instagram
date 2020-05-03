@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controller = require('./userController')
 const auth = require('../middleware/auth');
-const storage = require('../middleware/storageImage')
+const storage = require('../middleware/storageImageProfile')
 
 router.get('/', controller.getAll);
 router.get("/search/:id", controller.getByNick);

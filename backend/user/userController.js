@@ -33,6 +33,8 @@ controller.getByNick = async (req, res) => {
 
 controller.auth = async (req, res) =>{
     const { nick, password } = req.body;
+    console.log(nick)
+    console.log(password)
     if(!nick || !password) return res.json({error: "Dados insuficientes"});
     
     var testeByNick = await model.getByNick(nick);

@@ -34,7 +34,6 @@ controller.create = async(req, res) => {
     return res.json({post});
 }
 
-
 controller.teste = async (req, res) => {
     // /teste?dataInicial=2020-01-01&dataFinal=2020-04-05
     var dataInicial = (req.url+"").split("?")[1].split("&")[0].split("=")[1]
