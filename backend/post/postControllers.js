@@ -1,4 +1,5 @@
 const model = require('./postModels');
+const fs = require('fs');
 
 const controller = {};
 
@@ -32,6 +33,16 @@ controller.create = async(req, res) => {
     if (!nick || !image) return res.json({ error: 'Dados insuficientes' });
     const post = await model.create(nick, legend, image);
     return res.json({post});
+}
+
+controller.edit = async(req, res) => {
+    var { id, legend, image } = req.body;
+    if(!image) return res.json({ error: 'Dados insuficientes' })
+    var oldPost = await model.edit(id, legend, image);
+    if(oldPost.image != image ){
+        await fs.unlink(`upload/${oldPost.image}`);
+    }
+    return res.json(await model.getById(id));
 }
 
 controller.teste = async (req, res) => {

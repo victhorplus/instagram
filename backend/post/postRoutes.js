@@ -11,7 +11,7 @@ router.get('/date', controller.getByDate);
 
 router.post('/create', auth, storage.single('image'), controller.create);
 
-// router.put('/edit', auth, storage.single('image'), controller.edit);
+router.put('/edit', auth, storage.single('image'), controller.edit);
 
 // router.get('/teste', controller.teste)
 

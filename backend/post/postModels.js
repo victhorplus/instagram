@@ -33,27 +33,40 @@ model.getById = async (id) => {
 }
 
 model.getByDate = async (dataInicial, dataFinal) => {
-    const posts = await Post.find({
-        createdAt: {$gte: dataInicial, $lte: dataFinal}
-    });
-    return posts;
+    try{
+        const posts = await Post.find({
+            createdAt: {$gte: dataInicial, $lte: dataFinal}
+        });
+        return posts;
+    }catch(err){
+        return err;
+    }
+    
 }
 
 model.create = async (owner, legend, image) => {
-    var post = await Post.create({ owner, image, legend });
-    return post;
+    try{
+        var post = await Post.create({ owner, image, legend });
+        return post;
+    }catch(err){
+        return err;
+    }
 }
 
 model.edit = async (id, legend, image) => {
-    var post = await Post.findByIdAndUpdate(id, {legend, image}, {new: true});
-    return post;
+    try{
+        var post = await Post.findByIdAndUpdate(id, {legend, image}, {new: false});
+        return post;
+    }catch(err){
+        return err;
+    }
 }
 
 module.exports = model;
 
 async function teste(){
-    var result = await model.edit("5eaecdc7fdf39e181c6b332d", 'legenda04 - 03(1)', 'teste04_1588514247590_Captura de Tela (1).png');
+    var result = await model.edit("5eaecdc7fdf39e181c6b332d", 'legenda04 - 03(2)', 'teste04_1588514247590_Captura de Tela (1).png');
     console.log(result);
 }
 
- teste();
+ // teste();
