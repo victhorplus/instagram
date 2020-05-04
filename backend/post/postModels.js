@@ -44,11 +44,16 @@ model.create = async (owner, legend, image) => {
     return post;
 }
 
+model.edit = async (id, legend, image) => {
+    var post = await Post.findByIdAndUpdate(id, {legend, image}, {new: true});
+    return post;
+}
+
 module.exports = model;
 
 async function teste(){
-    var result = await model.getByDate('2020-04-25', '2020-04-26');
+    var result = await model.edit("5eaecdc7fdf39e181c6b332d", 'legenda04 - 03(1)', 'teste04_1588514247590_Captura de Tela (1).png');
     console.log(result);
 }
 
-// teste();
+ teste();

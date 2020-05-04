@@ -14,7 +14,7 @@ const sequelize = new Sequelize(
     }
 );
 
-const options = { useNewUrlParser: true , useUnifiedTopology: true };
+const options = { useNewUrlParser: true , useUnifiedTopology: true, useFindAndModify: false };
 
 mongoose.connect(config.mongo_url, options);;
 mongoose.set('useCreateIndex', true);
