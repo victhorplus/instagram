@@ -14,7 +14,7 @@ const config = () => {
             mongo_url: "mongodb+srv://user_admin:12345678asd@clusterapi-bpd1m.mongodb.net/test?retryWrites=true&w=majority",
             token_key: 'banana123',
             token_expiresIn: '7d',
-            aws_acessKey: 'dsa'
+            aws_acessKey: 'aaa'
         };
         default:
         console.log('Ambiente inválido')
