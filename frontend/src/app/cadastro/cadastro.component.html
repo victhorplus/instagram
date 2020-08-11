@@ -1,0 +1,55 @@
+<div class="formulario card">
+  <div class='card-header'>
+    <h5>Cadastre-se</h5>
+  </div>
+
+  <div class='head row'>
+    <div class="logo col-sm-8 row">
+      <img class="logo-img col-sm-4" src="\assets\logo10.png">
+      <h2 class='logo-title col-sm-8'>Nuvemgram</h2>
+    </div>
+    
+  </div>
+
+  <div class='body col-sm-8'>
+    <form method='post'>
+      <div class="form-group">
+        <label >Nome Completo</label>
+        <input #nome class="form-control" placeholder="Nome Completo">
+      </div>
+
+      <div class="form-group">
+        <label >Apelido</label>
+        <input #apelido type="text" class="form-control" placeholder="Apelido">
+      </div>
+
+      <div class="form-group">
+        <label >Email</label>
+        <input #email type="text" class="form-control" placeholder="Email">
+      </div>
+
+      <div class="form-group">
+        <label >Senha</label>
+        <input #senha type="password" class="form-control" placeholder="Senha">
+      </div>
+
+      <div class="form-group">
+        <label >Foto de perfil</label>
+        <input type="file" class="form-control" (change)='fileChange($event)' placeholder="foto de perfil">
+      </div>
+      <button (click)="cadastrar(
+                { 'nome': nome.value,
+                  'apelido': apelido.value,
+                  'email': email.value,
+                  'senha': senha.value,
+                  'foto': ''
+                }
+              )" 
+      class="btn btn-primary" >Cadastrar</button>
+    </form>
+  </div>
+</div>
+
+<div class= 'formulario card-login card'>
+  <small>Já tem uma conta? <a routerLink="../"> Conecte-se</a></small>
+</div>

@@ -1,0 +1,36 @@
+.logo{
+    margin: auto;
+}
+  
+.logo-img{
+border-radius: 60px 0px 0px 0px;
+background: #eaffea;
+}
+
+.logo-title{
+margin: auto;
+}
+
+.formulario{
+height: 50%;
+width: 40%;
+margin: 30px auto 0px;
+padding-bottom: 30px;
+}
+
+.card-header{
+    margin-bottom: 30px;
+}
+
+.body{
+margin: auto;
+margin-top: 50px;
+}
+
+.card-login{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding: 30px;
+    text-align: center;
+    font-size: 22px;
+  }

@@ -1,0 +1,6 @@
+<div *ngFor="let item of postagem" >
+  <br>
+  <div class="container">
+    <app-feed [user]= 'getUser(item.owner)' [post]="item"></app-feed>
+  </div>
+</div>

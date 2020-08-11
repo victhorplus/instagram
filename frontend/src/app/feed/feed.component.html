@@ -1,0 +1,26 @@
+<div class='container col-sm-6'>
+  <div class='card'>
+    <div class='card-header'>
+      <div class='head col-sm-12 row'>
+        <img [src]="user.img" class='user-img'>
+        <h5>{{ post.owner }}</h5>
+      </div>
+    </div>
+
+    <div class='card-body'>
+      <div class='img-post'>
+        <img [src]="post.img" class='col-sm-12' alt="">
+        <p>{{ post.description }}</p>
+      </div>
+      
+    </div>
+
+    <div class='card-footer'>
+      <button class='btn'
+      [class.btn-outline-primary]="like == false"
+      [class.btn-primary]="like == true"
+      >Curtir</button>
+      <span>Curtido por <strong>{{ post.likes }}</strong></span>
+    </div>
+  </div>
+</div>
